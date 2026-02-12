@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ConSySencI.A — Investor Deck</title>
+  <meta name="description" content="ConSySencI.A — Arquitetura Cognitiva Auditável para IA Evolutiva (Deck para investidores)" />
+  <style>
+    :root{
+      --bg0:#0B0E11;   /* preto técnico */
+      --bg1:#0F1318;   /* grafite */
+      --bg2:#111827;   /* azul grafite */
+      --line:#1F2937;  /* cinza linhas */
+      --text:#E5E7EB;  /* texto principal */
+      --muted:#9CA3AF; /* texto secundário */
+      --muted2:#6B7280;
+
+      --ok:#00E676;    /* verde cognitivo */
+      --ok2:#1AFF8C;
+      --warn:#FFC107;  /* âmbar */
+      --bad:#E53935;   /* vermelho contido */
+
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 24px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 8%, rgba(0,230,118,.12), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(26,255,140,.08), transparent 55%),
+        radial-gradient(700px 420px at 80% 85%, rgba(255,193,7,.05), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:1180px; margin:0 auto; padding:24px; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(11,14,17,.78);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(31,41,55,.8);
+    }
+    .topbar-inner{
+      max-width:1180px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 24px;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 250px;
+    }
+    .mark{
+      width:38px; height:38px; border-radius:12px;
+      background:
+        linear-gradient(180deg, rgba(0,230,118,.18), rgba(0,230,118,.04)),
+        radial-gradient(16px 16px at 30% 30%, rgba(0,230,118,.65), transparent 70%),
+        linear-gradient(180deg, rgba(17,24,39,.9), rgba(15,19,24,.9));
+      border: 1px solid rgba(0,230,118,.22);
+      box-shadow: 0 0 0 1px rgba(0,230,118,.06) inset, 0 10px 30px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .mark::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, transparent, rgba(0,230,118,.18), transparent);
+      animation: spin 7s linear infinite;
+      opacity:.7;
+    }
+    @keyframes spin { to { transform: rotate(360deg);} }
+
+    .brand-title{
+      line-height:1.1;
+    }
+    .brand-title .name{
+      font-weight:800;
+      letter-spacing:.6px;
+      font-size:14px;
+    }
+    .brand-title .tag{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:3px;
+    }
+
+    .nav{
+      display:flex; flex-wrap:wrap; gap:8px;
+      justify-content:flex-end;
+    }
+    .chip{
+      padding:8px 10px;
+      border: 1px solid rgba(31,41,55,.9);
+      border-radius:999px;
+      background: rgba(17,24,39,.55);
+      color:var(--muted);
+      font-size:12px;
+      transition: transform .15s ease, border-color .15s ease, color .15s ease, background .15s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(0,230,118,.35);
+      color: var(--text);
+      background: rgba(17,24,39,.75);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:18px;
+      padding:28px 24px;
+      border-radius: var(--radius2);
+      background:
+        linear-gradient(180deg, rgba(17,24,39,.65), rgba(15,19,24,.65));
+      border: 1px solid rgba(31,41,55,.9);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(900px 420px at 30% 0%, rgba(0,230,118,.14), transparent 60%),
+        radial-gradient(700px 420px at 95% 10%, rgba(26,255,140,.08), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .brand{ min-width: unset; }
+    }
+
+    .h-eyebrow{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:50%;
+      background: var(--ok);
+      box-shadow: 0 0 0 3px rgba(0,230,118,.12);
+    }
+
+    h1{
+      margin:0;
+      font-size:42px;
+      letter-spacing: -.02em;
+      line-height:1.05;
+    }
+    @media (max-width: 520px){ h1{ font-size:34px; } }
+
+    .sub{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.55;
+      max-width: 62ch;
+    }
+    .sub strong{ color:var(--text); font-weight:700; }
+
+    .hero-actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:18px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(31,41,55,.95);
+      background: rgba(17,24,39,.55);
+      color: var(--text);
+      font-weight:650;
+      font-size:13px;
+      cursor:pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(17,24,39,.75);
+      border-color: rgba(0,230,118,.35);
+    }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(0,230,118,.20), rgba(0,230,118,.06));
+      border-color: rgba(0,230,118,.35);
+      box-shadow: 0 0 0 1px rgba(0,230,118,.06) inset;
+    }
+    .btn.primary:hover{
+      border-color: rgba(0,230,118,.55);
+    }
+    .btn .kbd{
+      font-family:var(--mono);
+      font-size:11px;
+      color: var(--muted);
+      padding: 3px 7px;
+      border: 1px solid rgba(31,41,55,.9);
+      border-radius: 10px;
+      background: rgba(15,19,24,.6);
+    }
+
+    /* Right panel hero: live audit card */
+    .audit{
+      border-radius: var(--radius);
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(11,14,17,.50);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
+      padding:16px 16px 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .audit::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 260px at 20% 0%, rgba(0,230,118,.12), transparent 60%),
+        radial-gradient(520px 260px at 100% 20%, rgba(255,193,7,.06), transparent 55%);
+      pointer-events:none;
+    }
+    .audit .title{
+      position:relative;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .audit .title h3{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: var(--muted);
+    }
+    .pill{
+      position:relative;
+      font-family:var(--mono);
+      font-size:11px;
+      color: var(--ok);
+      border: 1px solid rgba(0,230,118,.35);
+      background: rgba(0,230,118,.08);
+      padding:6px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .metric-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .metric{
+      border-radius: 14px;
+      border: 1px solid rgba(31,41,55,.85);
+      background: rgba(17,24,39,.35);
+      padding:10px 12px;
+      min-height:72px;
+    }
+    .metric .label{
+      color: var(--muted);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      margin-bottom:8px;
+    }
+    .metric .value{
+      font-family:var(--mono);
+      font-size:20px;
+      letter-spacing:.02em;
+      font-weight:800;
+      line-height:1;
+    }
+    .metric .hint{
+      margin-top:8px;
+      color: var(--muted2);
+      font-size:11px;
+      line-height:1.35;
+    }
+    .ok{ color: var(--ok); }
+    .warn{ color: var(--warn); }
+    .bad{ color: var(--bad); }
+
+    .audit .foot{
+      position:relative;
+      margin-top:12px;
+      padding-top:12px;
+      border-top: 1px dashed rgba(31,41,55,.9);
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    /* Sections */
+    section{
+      margin-top:18px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(15,19,24,.55);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
+      overflow:hidden;
+    }
+    .sec-head{
+      padding:16px 18px;
+      border-bottom: 1px solid rgba(31,41,55,.9);
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .sec-head h2{
+      margin:0;
+      font-size:15px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: var(--text);
+    }
+    .sec-head .note{
+      color: var(--muted);
+      font-size:12px;
+      max-width: 65ch;
+      line-height:1.4;
+    }
+    .sec-body{
+      padding: 16px 18px 18px;
+    }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .grid3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; }
+    @media (max-width: 920px){
+      .grid2,.grid3{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(31,41,55,.88);
+      background: rgba(11,14,17,.42);
+      padding:14px 14px 12px;
+    }
+    .card .kicker{
+      font-size:11px;
+      color: var(--muted);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .hr{
+      height:1px;
+      background: rgba(31,41,55,.9);
+      margin:14px 0;
+    }
+
+    .bullets{ margin:0; padding-left: 18px; color: var(--muted); }
+    .bullets li{ margin:8px 0; line-height:1.45; font-size:13px; }
+    .bullets b{ color: var(--text); }
+
+    /* Code-like blocks */
+    .mono{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text);
+      line-height:1.5;
+      padding:12px 12px;
+      border-radius: 14px;
+      background: rgba(17,24,39,.35);
+      border: 1px solid rgba(31,41,55,.9);
+      overflow:auto;
+    }
+    .mono .muted{ color: var(--muted2); }
+
+    /* Table */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(11,14,17,.35);
+    }
+    th, td{
+      text-align:left;
+      padding:12px 12px;
+      border-bottom: 1px solid rgba(31,41,55,.85);
+      font-size:13px;
+    }
+    th{
+      color: var(--muted);
+      font-weight:700;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:11px;
+      background: rgba(17,24,39,.35);
+    }
+    tr:last-child td{ border-bottom:none; }
+    td .tag{
+      display:inline-flex; align-items:center;
+      padding:4px 8px;
+      border-radius:999px;
+      border: 1px solid rgba(31,41,55,.95);
+      background: rgba(17,24,39,.35);
+      font-family: var(--mono);
+      font-size:11px;
+      color: var(--muted);
+    }
+    .tag.ok{ border-color: rgba(0,230,118,.35); color: var(--ok); background: rgba(0,230,118,.06); }
+    .tag.warn{ border-color: rgba(255,193,7,.35); color: var(--warn); background: rgba(255,193,7,.06); }
+    .tag.bad{ border-color: rgba(229,57,53,.35); color: var(--bad); background: rgba(229,57,53,.06); }
+
+    /* Accordion */
+    details{
+      border-radius: 16px;
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(11,14,17,.35);
+      padding: 10px 12px;
+    }
+    details + details{ margin-top:10px; }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      font-weight:700;
+      font-size:13px;
+      color: var(--text);
+    }
+    summary::-webkit-details-marker{ display:none; }
+    summary .chev{
+      width:28px; height:28px;
+      border-radius: 10px;
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(17,24,39,.35);
+      display:flex; align-items:center; justify-content:center;
+      color: var(--muted);
+      font-family: var(--mono);
+      transition: transform .18s ease;
+      user-select:none;
+    }
+    details[open] summary .chev{ transform: rotate(90deg); }
+    details .content{
+      margin-top:10px;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    /* Footer */
+    footer{
+      margin:18px 0 8px;
+      color: var(--muted2);
+      font-size:12px;
+      line-height:1.5;
+      text-align:center;
+    }
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(17,24,39,.88);
+      border: 1px solid rgba(31,41,55,.9);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 12px;
+      display:none;
+      gap:10px;
+      align-items:center;
+      max-width: min(720px, calc(100vw - 24px));
+      z-index:999;
+      backdrop-filter: blur(10px);
+    }
+    .toast .tmark{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--ok);
+      box-shadow: 0 0 0 3px rgba(0,230,118,.10);
+      flex:0 0 auto;
+    }
+    .toast .ttext{ color: var(--muted); }
+    .toast.show{ display:flex; }
+
+    /* Print-friendly */
+    @media print{
+      .topbar, .hero-actions, .chip, .btn{ display:none !important; }
+      body{ background: #fff; color:#111; }
+      section, .hero, .audit, .card, details, table{ box-shadow:none !important; background:#fff !important; border:1px solid #ddd !important; }
+      .muted, .note, .sub{ color:#333 !important; }
+      .ok{ color:#0a8f46 !important; }
+      .warn{ color:#a97900 !important; }
+      .bad{ color:#b3261e !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div class="brand-title">
+          <div class="name">CONSYSENCI.A</div>
+          <div class="tag">Arquitetura Cognitiva Auditável • Investor Deck</div>
+        </div>
+      </div>
+
+      <div class="nav" role="navigation" aria-label="Navegação">
+        <div class="chip" data-jump="#problema">Problema</div>
+        <div class="chip" data-jump="#solucao">Solução</div>
+        <div class="chip" data-jump="#como">Como funciona</div>
+        <div class="chip" data-jump="#auditoria">Auditoria</div>
+        <div class="chip" data-jump="#diferencial">Diferencial</div>
+        <div class="chip" data-jump="#aplicacoes">Aplicações</div>
+        <div class="chip" data-jump="#honestidade">Honestidade</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <div class="hero" id="topo">
+      <div class="hero-grid">
+        <div>
+          <div class="h-eyebrow"><span class="dot"></span>Audit Mode • Causalidade • Replay • Evolução Controlada</div>
+          <h1>IA que não depende de “magia”.<br/>Depende de <span class="ok">controle</span>.</h1>
+          <div class="sub">
+            <strong>ConSySencI.A</strong> é uma arquitetura para construir agentes de IA
+            com <strong>decisão rastreável</strong>, <strong>estado explícito</strong>,
+            <strong>fronteira rígida entre hipótese e fato</strong> e
+            <strong>evolução versionada</strong>.
+            Ela não promete consciência humana. Ela entrega <strong>confiabilidade operacional</strong>.
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn primary" id="btnCopyPitch" title="Copiar pitch curto">
+              Copiar pitch de 30s <span class="kbd">CTRL</span><span class="kbd">C</span>
+            </button>
+            <button class="btn" data-jump="#auditoria">Ver auditoria</button>
+            <button class="btn" data-jump="#honestidade">Declaração de honestidade</button>
+          </div>
+        </div>
+
+        <!-- Right panel: audit snapshot -->
+        <aside class="audit" aria-label="Snapshot de auditoria">
+          <div class="title">
+            <h3>Snapshot • Auditoria Cognitiva</h3>
+            <div class="pill">ESTUDO • Sem execução</div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <div class="label">IGCC médio</div>
+              <div class="value ok">0.731</div>
+              <div class="hint">Consistência causal (0–1)</div>
+            </div>
+            <div class="metric">
+              <div class="label">Processos em risco</div>
+              <div class="value warn">26.9%</div>
+              <div class="hint">Detectados e controlados</div>
+            </div>
+            <div class="metric">
+              <div class="label">Processos bloqueados</div>
+              <div class="value bad">50</div>
+              <div class="hint">Sem decisão com ψ incompleto</div>
+            </div>
+            <div class="metric">
+              <div class="label">Tempo de auditoria</div>
+              <div class="value ok">1.04s</div>
+              <div class="hint">Relatório estrutural</div>
+            </div>
+          </div>
+
+          <div class="foot">
+            <b class="ok">Interpretação:</b> aqui não medimos “resposta bonita”.
+            Medimos <b>capacidade de bloquear decisões inválidas</b> e manter o sistema auditável.
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- PROBLEMA -->
+    <section id="problema">
+      <div class="sec-head">
+        <h2>Problema</h2>
+        <div class="note">O que quebra agentes em produção não é falta de “inteligência”. É falta de estrutura.</div>
+      </div>
+      <div class="sec-body grid2">
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Realidade de produção</div>
+          <h3>Agentes comuns falham por estado invisível</h3>
+          <ul class="bullets">
+            <li><b>Decisões não reproduzíveis</b> (não dá replay)</li>
+            <li><b>Memória implícita</b> (drift e inconsistência)</li>
+            <li><b>Hipótese vira fato</b> (alucinação sistêmica)</li>
+            <li><b>Evolução sem controle</b> (mutação caótica)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Custo do erro</div>
+          <h3>Quando errar é caro, “hype” não serve</h3>
+          <p>
+            Em enterprise e cenários críticos, o requisito não é “parecer inteligente”.
+            É <b>ser auditável</b>, <b>ser consistente</b>, <b>ser controlável</b>.
+          </p>
+          <div class="hr"></div>
+          <p>
+            ConSySencI.A é projetada para <b>preferir silêncio</b> a uma decisão sem base causal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUÇÃO -->
+    <section id="solucao">
+      <div class="sec-head">
+        <h2>Solução</h2>
+        <div class="note">Uma arquitetura cognitiva com ontologia fechada, causalidade materializada e evolução versionada.</div>
+      </div>
+      <div class="sec-body grid3">
+        <div class="card">
+          <div class="kicker"><spa
