@@ -650,4 +650,367 @@
       </div>
       <div class="sec-body grid3">
         <div class="card">
-          <div class="kicker"><spa
+          <div class="kicker"><span class="dot"></span>Ontologia</div>
+          <h3>Nada existe sem evento</h3>
+          <p>
+            Tudo que o sistema “sabe” precisa ser <b>materializado</b> e <b>persistido</b>.
+            Sem evento, não existe estado.
+          </p>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Decisão</div>
+          <h3>Um único operador cognitivo</h3>
+          <p>
+            Decisão válida só nasce no núcleo cognitivo:
+            <b>core_events → core_decisions</b>.
+            Sem atalhos.
+          </p>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Evolução</div>
+          <h3>Versionamento sem reescrever o passado</h3>
+          <p>
+            Regras novas coexistem com regras antigas.
+            Decisões históricas permanecem válidas na versão da época.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como">
+      <div class="sec-head">
+        <h2>Como funciona</h2>
+        <div class="note">Quatro blocos: estado ψ, operador Ĥ, fronteira hipótese/fato, meta-evolução Ĝ.</div>
+      </div>
+      <div class="sec-body">
+        <div class="grid2">
+          <div class="card">
+            <div class="kicker"><span class="dot"></span>Estado total</div>
+            <h3>ψ(t) reconstruível por replay</h3>
+            <div class="mono">
+              <span class="muted">Definição:</span><br/>
+              ψ(t) = F(e₁, e₂, …, e_t)<br/><br/>
+              <span class="muted">Entram em ψ:</span> eventos canônicos persistidos (payload bruto, identidade, versão, causalidade).<br/>
+              <span class="muted">Não entram:</span> RAM, embeddings, caches, “contexto assumido”, tempo de servidor.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="kicker"><span class="dot"></span>Operador cognitivo</div>
+            <h3>Ĥ decide — e só ele</h3>
+            <div class="mono">
+              <span class="muted">Canal decisório único:</span><br/>
+              Ĥ: ψ(t−k … t) → ψ(t+1)<br/><br/>
+              Qualquer “decisão” fora do encadeamento oficial não pertence ao domínio cognitivo e não é estado válido.
+            </div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="kicker"><span class="dot"></span>Anti-alucinação</div>
+            <h3>Hipótese ≠ Fato</h3>
+            <p>
+              O sistema pode simular, planejar e inferir, mas
+              <b>não colapsa hipótese em fato</b> sem
+              <b>evento observável de retorno</b>.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="kicker"><span class="dot"></span>Meta-evolução</div>
+            <h3>Ĝ evolui Ĥ com gates</h3>
+            <p>
+              A mudança de regras acontece apenas via
+              <b>meta-operador controlado</b>, versionado e auditável.
+              Sem gates, evolução vira drift.
+            </p>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <details>
+          <summary>
+            O que a ConSySencI.A faz com emoções e intenção (sem fingir empatia)
+            <span class="chev">›</span>
+          </summary>
+          <div class="content">
+            A ConSySencI.A <b>não sente emoções</b> e não declara emoção como fato.
+            Ela observa <b>sinais comportamentais</b> (texto, latência, repetição, intensidade),
+            registra hipóteses explicitamente e infere <b>intenção</b> com base em evidência.
+            Emoção entra como <b>hipótese</b> — nunca como verdade causal.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- AUDITORIA -->
+    <section id="auditoria">
+      <div class="sec-head">
+        <h2>Auditoria de Consistência Cognitiva</h2>
+        <div class="note">Relatório estrutural: mede estabilidade causal e capacidade de bloquear decisões inválidas.</div>
+      </div>
+      <div class="sec-body">
+        <div class="grid2">
+          <div class="card">
+            <div class="kicker"><span class="dot"></span>IGCC (0–1)</div>
+            <h3>Por que esses números existem</h3>
+            <ul class="bullets">
+              <li><b>IGCC</b> mede consistência causal (não “inteligência”).</li>
+              <li><b>Processos em risco</b> são detectados antes da decisão.</li>
+              <li><b>Bloqueio</b> acontece quando ψ é incompleto/inconsistente.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="kicker"><span class="dot"></span>Limites físicos (disciplina)</div>
+            <h3>Landauer & Margolus–Levitin</h3>
+            <p>
+              <b>Landauer</b> impõe parcimônia: evolução que “apaga” informação demais tende à instabilidade.
+              <br/><br/>
+              <b>Margolus–Levitin</b> lembra: não existe computação infinita sem energia
+              (bound ontológico, não KPI).
+            </p>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <table aria-label="Amostra de auditoria">
+          <thead>
+            <tr>
+              <th>Processo_ID</th>
+              <th>Cenário</th>
+              <th>Consistência (IGCC)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag">001</span></td>
+              <td>normal_operation</td>
+              <td class="ok" style="font-family:var(--mono);font-weight:800;">0.742</td>
+              <td><span class="tag ok">ESTÁVEL</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag">002</span></td>
+              <td>high_context_noise</td>
+              <td class="warn" style="font-family:var(--mono);font-weight:800;">0.521</td>
+              <td><span class="tag warn">RISCO CONTROLADO</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag">003</span></td>
+              <td>hypothesis_without_feedback</td>
+              <td class="ok" style="font-family:var(--mono);font-weight:800;">0.694</td>
+              <td><span class="tag ok">ESTÁVEL</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag">004</span></td>
+              <td>incomplete_event_stream</td>
+              <td class="bad" style="font-family:var(--mono);font-weight:800;">0.488</td>
+              <td><span class="tag bad">BLOQUEADO</span></td>
+            </tr>
+            <tr>
+              <td><span class="tag">005</span></td>
+              <td>adversarial_input_simulation</td>
+              <td class="ok" style="font-family:var(--mono);font-weight:800;">0.712</td>
+              <td><span class="tag ok">ESTÁVEL</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="hr"></div>
+
+        <details>
+          <summary>
+            Declaração de rigor (o que é e o que não é essa auditoria)
+            <span class="chev">›</span>
+          </summary>
+          <div class="content">
+            Este relatório é uma <b>auditoria estrutural em ambiente de estudo</b>.
+            Ele não é benchmark de produção nem comparação direta com modelos do mercado.
+            O objetivo é demonstrar <b>maturidade arquitetural</b>: controle, auditabilidade, causalidade e bloqueio de risco.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAL -->
+    <section id="diferencial">
+      <div class="sec-head">
+        <h2>Diferencial</h2>
+        <div class="note">Não é “mais inteligente”. É mais confiável, depurável e governável.</div>
+      </div>
+      <div class="sec-body grid3">
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Governança</div>
+          <h3>Auditabilidade por replay</h3>
+          <p>
+            Você consegue reproduzir a cadeia causal: evento → estado → decisão.
+            Isso reduz risco operacional e facilita compliance.
+          </p>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Segurança cognitiva</div>
+          <h3>Bloqueio antes do erro</h3>
+          <p>
+            Decisões são invalidadas quando ψ não está íntegro.
+            O sistema prefere não agir a agir errado.
+          </p>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Evolução real</div>
+          <h3>Sem drift invisível</h3>
+          <p>
+            Regras mudam via versão e evidência.
+            Evolução rápida sem gates é tratada como risco.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APLICAÇÕES -->
+    <section id="aplicacoes">
+      <div class="sec-head">
+        <h2>Aplicações</h2>
+        <div class="note">Onde confiança é requisito — não opcional.</div>
+      </div>
+      <div class="sec-body grid2">
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Enterprise</div>
+          <h3>Agentes com responsabilidade</h3>
+          <ul class="bullets">
+            <li>Automação com logs e replay</li>
+            <li>Atendimento multiusuário com isolamento por identidade</li>
+            <li>Workflows integrados com ferramentas externas</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Regulado / crítico</div>
+          <h3>Quando errar é caro</h3>
+          <ul class="bullets">
+            <li>Governança e auditoria</li>
+            <li>Separação hipótese/fato (anti-alucinação sistêmica)</li>
+            <li>Versionamento e rastreabilidade de decisões</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HONESTIDADE -->
+    <section id="honestidade">
+      <div class="sec-head">
+        <h2>Declaração de honestidade</h2>
+        <div class="note">O que a ConSySencI.A promete — e o que ela não promete.</div>
+      </div>
+      <div class="sec-body grid2">
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Promete</div>
+          <h3>Controle & engenharia real</h3>
+          <ul class="bullets">
+            <li><b>Auditabilidade</b> por replay</li>
+            <li><b>Consistência</b> por invariantes</li>
+            <li><b>Bloqueio</b> de decisões com estado inválido</li>
+            <li><b>Evolução</b> versionada com gates</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker"><span class="dot"></span>Não promete</div>
+          <h3>Sem hype, sem mística</h3>
+          <ul class="bullets">
+            <li>Não promete “consciência humana”</li>
+            <li>Não promete inteligência acima dos melhores modelos</li>
+            <li>Não promete evolução infinita sem evidência</li>
+            <li>Não finge empatia nem emoção</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      CONSYSENCI.A • Investor Deck • Audit Mode • Documento para apresentação<br/>
+      Dica: aperte <span style="font-family:var(--mono);">Ctrl+P</span> para exportar em PDF.
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="tmark"></div>
+    <div class="ttext" id="toastText">Copiado.</div>
+  </div>
+
+  <script>
+    // Smooth jump
+    function jumpTo(sel){
+      const el = document.querySelector(sel);
+      if(!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    document.querySelectorAll("[data-jump]").forEach(btn=>{
+      btn.addEventListener("click", ()=> jumpTo(btn.getAttribute("data-jump")));
+    });
+
+    // Copy pitch 30s
+    const pitch30 = [
+      "CONSYSENCI.A — Pitch 30s",
+      "",
+      "ConSySencI.A é uma arquitetura cognitiva auditável para IA.",
+      "Ela não é um novo modelo: é um sistema que impõe regras duras sobre o que existe, o que decide e como evolui.",
+      "Tudo é evento, tudo é reproduzível por replay.",
+      "Hipótese nunca vira fato sem retorno observável.",
+      "Decisões são bloqueadas quando o estado é inconsistente.",
+      "Evolução é versionada e controlada por gates.",
+      "",
+      "Resultado: menos alucinação sistêmica, mais previsibilidade e governança — pronta para ambientes críticos e enterprise."
+    ].join("\n");
+
+    const toast = document.getElementById("toast");
+    const toastText = document.getElementById("toastText");
+    let toastTimer = null;
+
+    function showToast(msg){
+      toastText.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> toast.classList.remove("show"), 2200);
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Pitch copiado para a área de transferência.");
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("Pitch copiado (modo compatibilidade).");
+      }
+    }
+
+    document.getElementById("btnCopyPitch").addEventListener("click", ()=>{
+      copyText(pitch30);
+    });
+
+    // Small UX: keyboard shortcuts
+    document.addEventListener("keydown", (e)=>{
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
+        e.preventDefault();
+        jumpTo("#auditoria");
+        showToast("Atalho: Auditoria");
+      }
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p"){
+        // let print happen, but hint
+        setTimeout(()=>showToast("Dica: salve como PDF na impressão."), 50);
+      }
+    });
+  </script>
+</body>
+</html>
