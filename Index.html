@@ -2,23 +2,25 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>ConSySencI.A — Investor Deck</title>
   <meta name="description" content="ConSySencI.A — Arquitetura Cognitiva Auditável para IA Evolutiva (Deck para investidores)" />
+
   <style>
     :root{
-      --bg0:#0B0E11;   /* preto técnico */
-      --bg1:#0F1318;   /* grafite */
-      --bg2:#111827;   /* azul grafite */
-      --line:#1F2937;  /* cinza linhas */
-      --text:#E5E7EB;  /* texto principal */
-      --muted:#9CA3AF; /* texto secundário */
+      --bg0:#0B0E11;
+      --bg1:#0F1318;
+      --bg2:#111827;
+      --line:#1F2937;
+
+      --text:#E5E7EB;
+      --muted:#9CA3AF;
       --muted2:#6B7280;
 
-      --ok:#00E676;    /* verde cognitivo */
+      --ok:#00E676;
       --ok2:#1AFF8C;
-      --warn:#FFC107;  /* âmbar */
-      --bad:#E53935;   /* vermelho contido */
+      --warn:#FFC107;
+      --bad:#E53935;
 
       --shadow: 0 12px 40px rgba(0,0,0,.45);
       --radius: 18px;
@@ -40,27 +42,29 @@
         radial-gradient(700px 420px at 80% 85%, rgba(255,193,7,.05), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     a{ color:inherit; text-decoration:none; }
-    .container{ max-width:1180px; margin:0 auto; padding:24px; }
+    .container{ max-width:1180px; margin:0 auto; padding: clamp(14px, 2.6vw, 24px); }
 
-    /* Topbar */
+    /* ===== TOPBAR (responsive) ===== */
     .topbar{
-      position:sticky; top:0; z-index:50;
-      background: rgba(11,14,17,.78);
+      position:sticky; top:0; z-index:100;
+      background: rgba(11,14,17,.82);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(31,41,55,.8);
+      border-bottom: 1px solid rgba(31,41,55,.85);
     }
     .topbar-inner{
       max-width:1180px; margin:0 auto;
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 24px;
-      gap:16px;
+      padding: 12px clamp(14px, 2.6vw, 24px);
+      gap:12px;
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 250px;
+      min-width: 0;
     }
     .mark{
       width:38px; height:38px; border-radius:12px;
@@ -70,8 +74,7 @@
         linear-gradient(180deg, rgba(17,24,39,.9), rgba(15,19,24,.9));
       border: 1px solid rgba(0,230,118,.22);
       box-shadow: 0 0 0 1px rgba(0,230,118,.06) inset, 0 10px 30px rgba(0,0,0,.35);
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden; flex:0 0 auto;
     }
     .mark::after{
       content:"";
@@ -82,20 +85,22 @@
     }
     @keyframes spin { to { transform: rotate(360deg);} }
 
-    .brand-title{
-      line-height:1.1;
-    }
+    .brand-title{ line-height:1.1; min-width:0; }
     .brand-title .name{
-      font-weight:800;
-      letter-spacing:.6px;
-      font-size:14px;
+      font-weight:800; letter-spacing:.6px;
+      font-size: 13px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      max-width: 52vw;
     }
     .brand-title .tag{
       color:var(--muted);
       font-size:12px;
       margin-top:3px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      max-width: 52vw;
     }
 
+    /* Desktop nav chips */
     .nav{
       display:flex; flex-wrap:wrap; gap:8px;
       justify-content:flex-end;
@@ -108,8 +113,8 @@
       color:var(--muted);
       font-size:12px;
       transition: transform .15s ease, border-color .15s ease, color .15s ease, background .15s ease;
-      cursor:pointer;
-      user-select:none;
+      cursor:pointer; user-select:none;
+      white-space:nowrap;
     }
     .chip:hover{
       transform: translateY(-1px);
@@ -118,13 +123,86 @@
       background: rgba(17,24,39,.75);
     }
 
-    /* Hero */
+    /* Mobile menu button */
+    .menu-btn{
+      display:none;
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(17,24,39,.55);
+      color: var(--text);
+      border-radius: 14px;
+      padding:10px 12px;
+      font-weight:700;
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      gap:10px;
+      align-items:center;
+    }
+    .burger{
+      width:18px; height:12px; position:relative; display:inline-block;
+    }
+    .burger span{
+      position:absolute; left:0; right:0;
+      height:2px; border-radius:10px;
+      background: rgba(229,231,235,.85);
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:5px; opacity:.9; }
+    .burger span:nth-child(3){ top:10px; opacity:.8; }
+
+    /* Mobile dropdown */
+    .mobile-nav{
+      display:none;
+      padding: 0 clamp(14px, 2.6vw, 24px) 14px;
+      border-top: 1px solid rgba(31,41,55,.85);
+      background: rgba(11,14,17,.86);
+    }
+    .mobile-nav.open{ display:block; }
+    .mobile-nav .list{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      padding-top:12px;
+    }
+    .mitem{
+      padding:12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(31,41,55,.9);
+      background: rgba(17,24,39,.45);
+      color: var(--text);
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+      user-select:none;
+      text-align:left;
+    }
+    .mitem small{
+      display:block;
+      font-size:11px;
+      color: var(--muted);
+      font-weight:600;
+      margin-top:4px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    /* Mobile behavior */
+    @media (max-width: 860px){
+      .nav{ display:none; }
+      .menu-btn{ display:inline-flex; }
+      .brand-title .name, .brand-title .tag{ max-width: 58vw; }
+    }
+    @media (max-width: 420px){
+      .mobile-nav .list{ grid-template-columns: 1fr; }
+      .brand-title .name, .brand-title .tag{ max-width: 62vw; }
+    }
+
+    /* ===== HERO ===== */
     .hero{
-      margin-top:18px;
-      padding:28px 24px;
+      margin-top:16px;
+      padding: clamp(16px, 2.8vw, 28px);
       border-radius: var(--radius2);
-      background:
-        linear-gradient(180deg, rgba(17,24,39,.65), rgba(15,19,24,.65));
+      background: linear-gradient(180deg, rgba(17,24,39,.62), rgba(15,19,24,.62));
       border: 1px solid rgba(31,41,55,.9);
       box-shadow: var(--shadow);
       position:relative;
@@ -141,49 +219,47 @@
     .hero-grid{
       position:relative;
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
+      grid-template-columns: 1.2fr .9fr;
+      gap:16px;
       align-items:stretch;
     }
     @media (max-width: 920px){
       .hero-grid{ grid-template-columns:1fr; }
-      .brand{ min-width: unset; }
     }
 
     .h-eyebrow{
       display:flex; align-items:center; gap:10px;
       color:var(--muted);
       font-size:12px;
-      letter-spacing:.18em;
+      letter-spacing:.16em;
       text-transform:uppercase;
       margin-bottom:10px;
+      flex-wrap:wrap;
     }
     .dot{
       width:9px; height:9px; border-radius:50%;
       background: var(--ok);
       box-shadow: 0 0 0 3px rgba(0,230,118,.12);
+      flex:0 0 auto;
     }
-
     h1{
       margin:0;
-      font-size:42px;
+      font-size: clamp(30px, 4.8vw, 46px);
       letter-spacing: -.02em;
-      line-height:1.05;
+      line-height:1.06;
     }
-    @media (max-width: 520px){ h1{ font-size:34px; } }
-
     .sub{
-      margin-top:14px;
+      margin-top:12px;
       color:var(--muted);
-      font-size:15px;
-      line-height:1.55;
-      max-width: 62ch;
+      font-size: clamp(13px, 1.8vw, 15px);
+      line-height:1.6;
+      max-width: 70ch;
     }
-    .sub strong{ color:var(--text); font-weight:700; }
+    .sub strong{ color:var(--text); font-weight:750; }
 
     .hero-actions{
       display:flex; flex-wrap:wrap; gap:10px;
-      margin-top:18px;
+      margin-top:16px;
     }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
@@ -193,7 +269,7 @@
       border: 1px solid rgba(31,41,55,.95);
       background: rgba(17,24,39,.55);
       color: var(--text);
-      font-weight:650;
+      font-weight:700;
       font-size:13px;
       cursor:pointer;
       transition: transform .15s ease, border-color .15s ease, background .15s ease;
@@ -209,9 +285,6 @@
       border-color: rgba(0,230,118,.35);
       box-shadow: 0 0 0 1px rgba(0,230,118,.06) inset;
     }
-    .btn.primary:hover{
-      border-color: rgba(0,230,118,.55);
-    }
     .btn .kbd{
       font-family:var(--mono);
       font-size:11px;
@@ -222,13 +295,13 @@
       background: rgba(15,19,24,.6);
     }
 
-    /* Right panel hero: live audit card */
+    /* ===== AUDIT CARD ===== */
     .audit{
       border-radius: var(--radius);
       border: 1px solid rgba(31,41,55,.9);
       background: rgba(11,14,17,.50);
       box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
-      padding:16px 16px 14px;
+      padding: 14px;
       position:relative;
       overflow:hidden;
     }
@@ -245,10 +318,11 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:10px;
       margin-bottom:12px;
+      flex-wrap:wrap;
     }
     .audit .title h3{
       margin:0;
-      font-size:13px;
+      font-size:12px;
       letter-spacing:.12em;
       text-transform:uppercase;
       color: var(--muted);
@@ -271,6 +345,9 @@
       gap:10px;
       margin-top:10px;
     }
+    @media (max-width: 420px){
+      .metric-grid{ grid-template-columns:1fr; }
+    }
     .metric{
       border-radius: 14px;
       border: 1px solid rgba(31,41,55,.85);
@@ -291,6 +368,7 @@
       letter-spacing:.02em;
       font-weight:800;
       line-height:1;
+      word-break:break-word;
     }
     .metric .hint{
       margin-top:8px;
@@ -312,9 +390,9 @@
       line-height:1.45;
     }
 
-    /* Sections */
+    /* ===== SECTIONS ===== */
     section{
-      margin-top:18px;
+      margin-top:16px;
       border-radius: var(--radius2);
       border: 1px solid rgba(31,41,55,.9);
       background: rgba(15,19,24,.55);
@@ -322,25 +400,26 @@
       overflow:hidden;
     }
     .sec-head{
-      padding:16px 18px;
+      padding: 14px 16px;
       border-bottom: 1px solid rgba(31,41,55,.9);
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+      flex-wrap:wrap;
     }
     .sec-head h2{
       margin:0;
-      font-size:15px;
-      letter-spacing:.12em;
+      font-size:13px;
+      letter-spacing:.14em;
       text-transform:uppercase;
       color: var(--text);
     }
     .sec-head .note{
       color: var(--muted);
       font-size:12px;
-      max-width: 65ch;
-      line-height:1.4;
+      line-height:1.45;
+      max-width: 80ch;
     }
     .sec-body{
-      padding: 16px 18px 18px;
+      padding: 14px 16px 16px;
     }
 
     .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
@@ -353,7 +432,7 @@
       border-radius: var(--radius);
       border: 1px solid rgba(31,41,55,.88);
       background: rgba(11,14,17,.42);
-      padding:14px 14px 12px;
+      padding:14px;
     }
     .card .kicker{
       font-size:11px;
@@ -362,67 +441,78 @@
       text-transform:uppercase;
       margin-bottom:8px;
       display:flex; align-items:center; gap:8px;
+      flex-wrap:wrap;
     }
     .card h3{
       margin:0 0 10px;
       font-size:16px;
       letter-spacing:-.01em;
+      line-height:1.2;
     }
     .card p{
       margin:0;
       color: var(--muted);
       font-size:13px;
-      line-height:1.55;
+      line-height:1.58;
     }
-    .hr{
-      height:1px;
-      background: rgba(31,41,55,.9);
-      margin:14px 0;
-    }
+
+    .hr{ height:1px; background: rgba(31,41,55,.9); margin:14px 0; }
 
     .bullets{ margin:0; padding-left: 18px; color: var(--muted); }
     .bullets li{ margin:8px 0; line-height:1.45; font-size:13px; }
     .bullets b{ color: var(--text); }
 
-    /* Code-like blocks */
     .mono{
       font-family: var(--mono);
       font-size: 12px;
       color: var(--text);
       line-height:1.5;
-      padding:12px 12px;
+      padding:12px;
       border-radius: 14px;
       background: rgba(17,24,39,.35);
       border: 1px solid rgba(31,41,55,.9);
       overflow:auto;
+      max-width: 100%;
     }
     .mono .muted{ color: var(--muted2); }
 
-    /* Table */
-    table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      overflow:hidden;
+    /* ===== TABLE RESPONSIVE ===== */
+    .table-wrap{
       border-radius: 16px;
       border: 1px solid rgba(31,41,55,.9);
       background: rgba(11,14,17,.35);
+      overflow:hidden;
+    }
+    .table-scroll{
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    table{
+      width:100%;
+      min-width: 760px; /* garante layout inteiro e scroll no mobile */
+      border-collapse:separate;
+      border-spacing:0;
     }
     th, td{
       text-align:left;
       padding:12px 12px;
       border-bottom: 1px solid rgba(31,41,55,.85);
       font-size:13px;
+      white-space:nowrap;
     }
     th{
       color: var(--muted);
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.10em;
       text-transform:uppercase;
       font-size:11px;
-      background: rgba(17,24,39,.35);
+      background: rgba(17,24,39,.42);
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
     tr:last-child td{ border-bottom:none; }
+
     td .tag{
       display:inline-flex; align-items:center;
       padding:4px 8px;
@@ -437,7 +527,7 @@
     .tag.warn{ border-color: rgba(255,193,7,.35); color: var(--warn); background: rgba(255,193,7,.06); }
     .tag.bad{ border-color: rgba(229,57,53,.35); color: var(--bad); background: rgba(229,57,53,.06); }
 
-    /* Accordion */
+    /* ===== DETAILS ===== */
     details{
       border-radius: 16px;
       border: 1px solid rgba(31,41,55,.9);
@@ -450,7 +540,7 @@
       list-style:none;
       display:flex; align-items:center; justify-content:space-between;
       gap:10px;
-      font-weight:700;
+      font-weight:800;
       font-size:13px;
       color: var(--text);
     }
@@ -465,31 +555,32 @@
       font-family: var(--mono);
       transition: transform .18s ease;
       user-select:none;
+      flex:0 0 auto;
     }
     details[open] summary .chev{ transform: rotate(90deg); }
     details .content{
       margin-top:10px;
       color: var(--muted);
       font-size:13px;
-      line-height:1.55;
+      line-height:1.58;
     }
 
-    /* Footer */
     footer{
-      margin:18px 0 8px;
+      margin:16px 0 8px;
       color: var(--muted2);
       font-size:12px;
       line-height:1.5;
       text-align:center;
+      padding-bottom: 8px;
     }
 
     /* Toast */
     .toast{
       position: fixed;
       left: 50%;
-      bottom: 18px;
+      bottom: max(18px, env(safe-area-inset-bottom));
       transform: translateX(-50%);
-      background: rgba(17,24,39,.88);
+      background: rgba(17,24,39,.90);
       border: 1px solid rgba(31,41,55,.9);
       box-shadow: var(--shadow);
       color: var(--text);
@@ -512,15 +603,17 @@
     .toast .ttext{ color: var(--muted); }
     .toast.show{ display:flex; }
 
-    /* Print-friendly */
+    /* Print */
     @media print{
-      .topbar, .hero-actions, .chip, .btn{ display:none !important; }
+      .topbar, .hero-actions, .menu-btn, .mobile-nav{ display:none !important; }
       body{ background: #fff; color:#111; }
-      section, .hero, .audit, .card, details, table{ box-shadow:none !important; background:#fff !important; border:1px solid #ddd !important; }
-      .muted, .note, .sub{ color:#333 !important; }
+      section, .hero, .audit, .card, details, .table-wrap{ box-shadow:none !important; background:#fff !important; border:1px solid #ddd !important; }
+      .sub, .note, .content, p, li{ color:#333 !important; }
       .ok{ color:#0a8f46 !important; }
       .warn{ color:#a97900 !important; }
       .bad{ color:#b3261e !important; }
+      table{ min-width: unset !important; }
+      th{ position:static !important; }
     }
   </style>
 </head>
@@ -536,6 +629,7 @@
         </div>
       </div>
 
+      <!-- Desktop nav -->
       <div class="nav" role="navigation" aria-label="Navegação">
         <div class="chip" data-jump="#problema">Problema</div>
         <div class="chip" data-jump="#solucao">Solução</div>
@@ -544,6 +638,24 @@
         <div class="chip" data-jump="#diferencial">Diferencial</div>
         <div class="chip" data-jump="#aplicacoes">Aplicações</div>
         <div class="chip" data-jump="#honestidade">Honestidade</div>
+      </div>
+
+      <!-- Mobile menu -->
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">
+        <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <div class="list">
+        <div class="mitem" data-jump="#problema">Problema <small>o que quebra agentes</small></div>
+        <div class="mitem" data-jump="#solucao">Solução <small>arquitetura auditável</small></div>
+        <div class="mitem" data-jump="#como">Como funciona <small>ψ, Ĥ, Ĝ</small></div>
+        <div class="mitem" data-jump="#auditoria">Auditoria <small>IGCC e risco</small></div>
+        <div class="mitem" data-jump="#diferencial">Diferencial <small>governança</small></div>
+        <div class="mitem" data-jump="#aplicacoes">Aplicações <small>enterprise</small></div>
+        <div class="mitem" data-jump="#honestidade">Honestidade <small>sem hype</small></div>
       </div>
     </div>
   </div>
@@ -556,8 +668,8 @@
           <div class="h-eyebrow"><span class="dot"></span>Audit Mode • Causalidade • Replay • Evolução Controlada</div>
           <h1>IA que não depende de “magia”.<br/>Depende de <span class="ok">controle</span>.</h1>
           <div class="sub">
-            <strong>ConSySencI.A</strong> é uma arquitetura para construir agentes de IA
-            com <strong>decisão rastreável</strong>, <strong>estado explícito</strong>,
+            <strong>ConSySencI.A</strong> é uma arquitetura para construir agentes de IA com
+            <strong>decisão rastreável</strong>, <strong>estado explícito</strong>,
             <strong>fronteira rígida entre hipótese e fato</strong> e
             <strong>evolução versionada</strong>.
             Ela não promete consciência humana. Ela entrega <strong>confiabilidade operacional</strong>.
@@ -568,11 +680,10 @@
               Copiar pitch de 30s <span class="kbd">CTRL</span><span class="kbd">C</span>
             </button>
             <button class="btn" data-jump="#auditoria">Ver auditoria</button>
-            <button class="btn" data-jump="#honestidade">Declaração de honestidade</button>
+            <button class="btn" data-jump="#honestidade">Declaração</button>
           </div>
         </div>
 
-        <!-- Right panel: audit snapshot -->
         <aside class="audit" aria-label="Snapshot de auditoria">
           <div class="title">
             <h3>Snapshot • Auditoria Cognitiva</h3>
@@ -596,15 +707,15 @@
               <div class="hint">Sem decisão com ψ incompleto</div>
             </div>
             <div class="metric">
-              <div class="label">Tempo de auditoria</div>
+              <div class="label">Tempo (relatório)</div>
               <div class="value ok">1.04s</div>
-              <div class="hint">Relatório estrutural</div>
+              <div class="hint">Auditoria estrutural</div>
             </div>
           </div>
 
           <div class="foot">
-            <b class="ok">Interpretação:</b> aqui não medimos “resposta bonita”.
-            Medimos <b>capacidade de bloquear decisões inválidas</b> e manter o sistema auditável.
+            <b class="ok">Regra:</b> não medimos “resposta bonita”.
+            Medimos <b>capacidade de bloquear decisões inválidas</b> e manter replay/auditoria.
           </div>
         </aside>
       </div>
@@ -614,30 +725,25 @@
     <section id="problema">
       <div class="sec-head">
         <h2>Problema</h2>
-        <div class="note">O que quebra agentes em produção não é falta de “inteligência”. É falta de estrutura.</div>
+        <div class="note">O que quebra agentes em produção não é falta de “inteligência”. É falta de estrutura e governança.</div>
       </div>
       <div class="sec-body grid2">
         <div class="card">
           <div class="kicker"><span class="dot"></span>Realidade de produção</div>
           <h3>Agentes comuns falham por estado invisível</h3>
           <ul class="bullets">
-            <li><b>Decisões não reproduzíveis</b> (não dá replay)</li>
-            <li><b>Memória implícita</b> (drift e inconsistência)</li>
+            <li><b>Decisões não reproduzíveis</b> (sem replay)</li>
+            <li><b>Memória implícita</b> (drift)</li>
             <li><b>Hipótese vira fato</b> (alucinação sistêmica)</li>
             <li><b>Evolução sem controle</b> (mutação caótica)</li>
           </ul>
         </div>
         <div class="card">
           <div class="kicker"><span class="dot"></span>Custo do erro</div>
-          <h3>Quando errar é caro, “hype” não serve</h3>
-          <p>
-            Em enterprise e cenários críticos, o requisito não é “parecer inteligente”.
-            É <b>ser auditável</b>, <b>ser consistente</b>, <b>ser controlável</b>.
-          </p>
+          <h3>Quando errar é caro, hype não serve</h3>
+          <p>Em enterprise, requisito é <b>ser auditável</b>, <b>ser consistente</b>, <b>ser controlável</b>.</p>
           <div class="hr"></div>
-          <p>
-            ConSySencI.A é projetada para <b>preferir silêncio</b> a uma decisão sem base causal.
-          </p>
+          <p>ConSySencI.A é projetada para <b>preferir silêncio</b> a uma decisão sem base causal.</p>
         </div>
       </div>
     </section>
@@ -646,33 +752,23 @@
     <section id="solucao">
       <div class="sec-head">
         <h2>Solução</h2>
-        <div class="note">Uma arquitetura cognitiva com ontologia fechada, causalidade materializada e evolução versionada.</div>
+        <div class="note">Arquitetura cognitiva com ontologia fechada, causalidade materializada e evolução versionada.</div>
       </div>
       <div class="sec-body grid3">
         <div class="card">
           <div class="kicker"><span class="dot"></span>Ontologia</div>
           <h3>Nada existe sem evento</h3>
-          <p>
-            Tudo que o sistema “sabe” precisa ser <b>materializado</b> e <b>persistido</b>.
-            Sem evento, não existe estado.
-          </p>
+          <p>Tudo que o sistema “sabe” precisa ser <b>materializado</b> e <b>persistido</b>. Sem evento, não há estado.</p>
         </div>
         <div class="card">
           <div class="kicker"><span class="dot"></span>Decisão</div>
-          <h3>Um único operador cognitivo</h3>
-          <p>
-            Decisão válida só nasce no núcleo cognitivo:
-            <b>core_events → core_decisions</b>.
-            Sem atalhos.
-          </p>
+          <h3>Operador único</h3>
+          <p>Decisão válida só nasce no núcleo cognitivo: <b>core_events → core_decisions</b>. Sem atalhos.</p>
         </div>
         <div class="card">
           <div class="kicker"><span class="dot"></span>Evolução</div>
-          <h3>Versionamento sem reescrever o passado</h3>
-          <p>
-            Regras novas coexistem com regras antigas.
-            Decisões históricas permanecem válidas na versão da época.
-          </p>
+          <h3>Versionamento</h3>
+          <p>Regras novas coexistem com antigas. O passado não é reescrito. Auditoria permanece possível.</p>
         </div>
       </div>
     </section>
@@ -681,7 +777,7 @@
     <section id="como">
       <div class="sec-head">
         <h2>Como funciona</h2>
-        <div class="note">Quatro blocos: estado ψ, operador Ĥ, fronteira hipótese/fato, meta-evolução Ĝ.</div>
+        <div class="note">Quatro blocos: estado ψ, operador Ĥ, fronteira hipótese/fato e meta-evolução Ĝ.</div>
       </div>
       <div class="sec-body">
         <div class="grid2">
@@ -691,8 +787,8 @@
             <div class="mono">
               <span class="muted">Definição:</span><br/>
               ψ(t) = F(e₁, e₂, …, e_t)<br/><br/>
-              <span class="muted">Entram em ψ:</span> eventos canônicos persistidos (payload bruto, identidade, versão, causalidade).<br/>
-              <span class="muted">Não entram:</span> RAM, embeddings, caches, “contexto assumido”, tempo de servidor.
+              <span class="muted">Entra em ψ:</span> eventos persistidos (payload bruto, identidade, versão, causalidade).<br/>
+              <span class="muted">Não entra:</span> RAM, embeddings, caches, “contexto assumido”, hora do servidor.
             </div>
           </div>
 
@@ -702,7 +798,7 @@
             <div class="mono">
               <span class="muted">Canal decisório único:</span><br/>
               Ĥ: ψ(t−k … t) → ψ(t+1)<br/><br/>
-              Qualquer “decisão” fora do encadeamento oficial não pertence ao domínio cognitivo e não é estado válido.
+              Decisão fora do encadeamento oficial não pertence ao domínio cognitivo e não é estado válido.
             </div>
           </div>
         </div>
@@ -713,21 +809,13 @@
           <div class="card">
             <div class="kicker"><span class="dot"></span>Anti-alucinação</div>
             <h3>Hipótese ≠ Fato</h3>
-            <p>
-              O sistema pode simular, planejar e inferir, mas
-              <b>não colapsa hipótese em fato</b> sem
-              <b>evento observável de retorno</b>.
-            </p>
+            <p>O sistema pode simular e planejar, mas <b>não colapsa hipótese em fato</b> sem <b>evento observável de retorno</b>.</p>
           </div>
 
           <div class="card">
             <div class="kicker"><span class="dot"></span>Meta-evolução</div>
             <h3>Ĝ evolui Ĥ com gates</h3>
-            <p>
-              A mudança de regras acontece apenas via
-              <b>meta-operador controlado</b>, versionado e auditável.
-              Sem gates, evolução vira drift.
-            </p>
+            <p>Regras mudam apenas via meta-operador controlado, versionado e auditável. Sem gates, evolução vira drift.</p>
           </div>
         </div>
 
@@ -735,14 +823,13 @@
 
         <details>
           <summary>
-            O que a ConSySencI.A faz com emoções e intenção (sem fingir empatia)
+            Emoções e intenção (sem fingir empatia)
             <span class="chev">›</span>
           </summary>
           <div class="content">
-            A ConSySencI.A <b>não sente emoções</b> e não declara emoção como fato.
-            Ela observa <b>sinais comportamentais</b> (texto, latência, repetição, intensidade),
-            registra hipóteses explicitamente e infere <b>intenção</b> com base em evidência.
-            Emoção entra como <b>hipótese</b> — nunca como verdade causal.
+            ConSySencI.A <b>não sente emoções</b> e não declara emoção como fato.
+            Ela observa sinais (texto, latência, repetição) e registra hipóteses explicitamente.
+            A partir disso, infere <b>intenção</b> com base em evidência.
           </div>
         </details>
       </div>
@@ -751,88 +838,90 @@
     <!-- AUDITORIA -->
     <section id="auditoria">
       <div class="sec-head">
-        <h2>Auditoria de Consistência Cognitiva</h2>
-        <div class="note">Relatório estrutural: mede estabilidade causal e capacidade de bloquear decisões inválidas.</div>
+        <h2>Auditoria</h2>
+        <div class="note">Mede estabilidade causal e capacidade de bloquear decisões inválidas. Não é benchmark de LLM.</div>
       </div>
       <div class="sec-body">
         <div class="grid2">
           <div class="card">
             <div class="kicker"><span class="dot"></span>IGCC (0–1)</div>
-            <h3>Por que esses números existem</h3>
+            <h3>Por que os números existem</h3>
             <ul class="bullets">
               <li><b>IGCC</b> mede consistência causal (não “inteligência”).</li>
-              <li><b>Processos em risco</b> são detectados antes da decisão.</li>
-              <li><b>Bloqueio</b> acontece quando ψ é incompleto/inconsistente.</li>
+              <li><b>Processos em risco</b> são detectados antes de decidir.</li>
+              <li><b>Bloqueio</b> acontece quando ψ é incompleto.</li>
             </ul>
           </div>
           <div class="card">
             <div class="kicker"><span class="dot"></span>Limites físicos (disciplina)</div>
             <h3>Landauer & Margolus–Levitin</h3>
             <p>
-              <b>Landauer</b> impõe parcimônia: evolução que “apaga” informação demais tende à instabilidade.
-              <br/><br/>
-              <b>Margolus–Levitin</b> lembra: não existe computação infinita sem energia
-              (bound ontológico, não KPI).
+              <b>Landauer</b>: evolução que “apaga” informação demais tende à instabilidade (parcimônia informacional).<br/><br/>
+              <b>Margolus–Levitin</b>: não existe computação infinita sem energia (bound ontológico, não KPI).
             </p>
           </div>
         </div>
 
         <div class="hr"></div>
 
-        <table aria-label="Amostra de auditoria">
-          <thead>
-            <tr>
-              <th>Processo_ID</th>
-              <th>Cenário</th>
-              <th>Consistência (IGCC)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="tag">001</span></td>
-              <td>normal_operation</td>
-              <td class="ok" style="font-family:var(--mono);font-weight:800;">0.742</td>
-              <td><span class="tag ok">ESTÁVEL</span></td>
-            </tr>
-            <tr>
-              <td><span class="tag">002</span></td>
-              <td>high_context_noise</td>
-              <td class="warn" style="font-family:var(--mono);font-weight:800;">0.521</td>
-              <td><span class="tag warn">RISCO CONTROLADO</span></td>
-            </tr>
-            <tr>
-              <td><span class="tag">003</span></td>
-              <td>hypothesis_without_feedback</td>
-              <td class="ok" style="font-family:var(--mono);font-weight:800;">0.694</td>
-              <td><span class="tag ok">ESTÁVEL</span></td>
-            </tr>
-            <tr>
-              <td><span class="tag">004</span></td>
-              <td>incomplete_event_stream</td>
-              <td class="bad" style="font-family:var(--mono);font-weight:800;">0.488</td>
-              <td><span class="tag bad">BLOQUEADO</span></td>
-            </tr>
-            <tr>
-              <td><span class="tag">005</span></td>
-              <td>adversarial_input_simulation</td>
-              <td class="ok" style="font-family:var(--mono);font-weight:800;">0.712</td>
-              <td><span class="tag ok">ESTÁVEL</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <div class="table-scroll" role="region" aria-label="Tabela com rolagem horizontal">
+            <table aria-label="Amostra de auditoria">
+              <thead>
+                <tr>
+                  <th>Processo_ID</th>
+                  <th>Cenário</th>
+                  <th>Consistência (IGCC)</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="tag">001</span></td>
+                  <td>normal_operation</td>
+                  <td class="ok" style="font-family:var(--mono);font-weight:900;">0.742</td>
+                  <td><span class="tag ok">ESTÁVEL</span></td>
+                </tr>
+                <tr>
+                  <td><span class="tag">002</span></td>
+                  <td>high_context_noise</td>
+                  <td class="warn" style="font-family:var(--mono);font-weight:900;">0.521</td>
+                  <td><span class="tag warn">RISCO</span></td>
+                </tr>
+                <tr>
+                  <td><span class="tag">003</span></td>
+                  <td>hypothesis_without_feedback</td>
+                  <td class="ok" style="font-family:var(--mono);font-weight:900;">0.694</td>
+                  <td><span class="tag ok">ESTÁVEL</span></td>
+                </tr>
+                <tr>
+                  <td><span class="tag">004</span></td>
+                  <td>incomplete_event_stream</td>
+                  <td class="bad" style="font-family:var(--mono);font-weight:900;">0.488</td>
+                  <td><span class="tag bad">BLOQUEADO</span></td>
+                </tr>
+                <tr>
+                  <td><span class="tag">005</span></td>
+                  <td>adversarial_input_simulation</td>
+                  <td class="ok" style="font-family:var(--mono);font-weight:900;">0.712</td>
+                  <td><span class="tag ok">ESTÁVEL</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         <div class="hr"></div>
 
         <details>
           <summary>
-            Declaração de rigor (o que é e o que não é essa auditoria)
+            Declaração de rigor (o que é e o que não é)
             <span class="chev">›</span>
           </summary>
           <div class="content">
-            Este relatório é uma <b>auditoria estrutural em ambiente de estudo</b>.
-            Ele não é benchmark de produção nem comparação direta com modelos do mercado.
-            O objetivo é demonstrar <b>maturidade arquitetural</b>: controle, auditabilidade, causalidade e bloqueio de risco.
+            Isso é uma <b>auditoria estrutural em ambiente de estudo</b>.
+            Não é benchmark de produção nem comparação de “QI” com modelos do mercado.
+            O objetivo é demonstrar <b>controle, auditabilidade, causalidade</b> e bloqueio de risco.
           </div>
         </details>
       </div>
@@ -847,27 +936,18 @@
       <div class="sec-body grid3">
         <div class="card">
           <div class="kicker"><span class="dot"></span>Governança</div>
-          <h3>Auditabilidade por replay</h3>
-          <p>
-            Você consegue reproduzir a cadeia causal: evento → estado → decisão.
-            Isso reduz risco operacional e facilita compliance.
-          </p>
+          <h3>Replay completo</h3>
+          <p>Reproduz a cadeia causal: evento → estado → decisão. Ajuda compliance e depuração.</p>
         </div>
         <div class="card">
-          <div class="kicker"><span class="dot"></span>Segurança cognitiva</div>
+          <div class="kicker"><span class="dot"></span>Segurança</div>
           <h3>Bloqueio antes do erro</h3>
-          <p>
-            Decisões são invalidadas quando ψ não está íntegro.
-            O sistema prefere não agir a agir errado.
-          </p>
+          <p>Decisões são invalidadas quando ψ não está íntegro. Melhor silêncio do que erro.</p>
         </div>
         <div class="card">
-          <div class="kicker"><span class="dot"></span>Evolução real</div>
+          <div class="kicker"><span class="dot"></span>Evolução</div>
           <h3>Sem drift invisível</h3>
-          <p>
-            Regras mudam via versão e evidência.
-            Evolução rápida sem gates é tratada como risco.
-          </p>
+          <p>Regras mudam via versão e evidência. Evolução rápida sem gates é risco.</p>
         </div>
       </div>
     </section>
@@ -889,7 +969,7 @@
           </ul>
         </div>
         <div class="card">
-          <div class="kicker"><span class="dot"></span>Regulado / crítico</div>
+          <div class="kicker"><span class="dot"></span>Crítico / Regulado</div>
           <h3>Quando errar é caro</h3>
           <ul class="bullets">
             <li>Governança e auditoria</li>
@@ -903,8 +983,8 @@
     <!-- HONESTIDADE -->
     <section id="honestidade">
       <div class="sec-head">
-        <h2>Declaração de honestidade</h2>
-        <div class="note">O que a ConSySencI.A promete — e o que ela não promete.</div>
+        <h2>Honestidade</h2>
+        <div class="note">O que promete (controle) e o que não promete (consciência humana).</div>
       </div>
       <div class="sec-body grid2">
         <div class="card">
@@ -919,10 +999,10 @@
         </div>
         <div class="card">
           <div class="kicker"><span class="dot"></span>Não promete</div>
-          <h3>Sem hype, sem mística</h3>
+          <h3>Sem mística</h3>
           <ul class="bullets">
             <li>Não promete “consciência humana”</li>
-            <li>Não promete inteligência acima dos melhores modelos</li>
+            <li>Não promete superar modelos top só por arquitetura</li>
             <li>Não promete evolução infinita sem evidência</li>
             <li>Não finge empatia nem emoção</li>
           </ul>
@@ -931,8 +1011,7 @@
     </section>
 
     <footer>
-      CONSYSENCI.A • Investor Deck • Audit Mode • Documento para apresentação<br/>
-      Dica: aperte <span style="font-family:var(--mono);">Ctrl+P</span> para exportar em PDF.
+      CONSYSENCI.A • Investor Deck • Audit Mode • <span style="font-family:var(--mono);">Ctrl+P</span> para exportar PDF
     </footer>
   </main>
 
@@ -942,28 +1021,45 @@
   </div>
 
   <script>
-    // Smooth jump
+    // ===== smooth jump =====
     function jumpTo(sel){
       const el = document.querySelector(sel);
       if(!el) return;
       el.scrollIntoView({behavior:"smooth", block:"start"});
     }
-    document.querySelectorAll("[data-jump]").forEach(btn=>{
-      btn.addEventListener("click", ()=> jumpTo(btn.getAttribute("data-jump")));
+
+    // ===== mobile menu =====
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+    function setMenu(open){
+      mobileNav.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    menuBtn?.addEventListener("click", ()=>{
+      setMenu(!mobileNav.classList.contains("open"));
     });
 
-    // Copy pitch 30s
+    // bind navigation items
+    document.querySelectorAll("[data-jump]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const target = btn.getAttribute("data-jump");
+        setMenu(false);
+        jumpTo(target);
+      });
+    });
+
+    // ===== copy pitch =====
     const pitch30 = [
       "CONSYSENCI.A — Pitch 30s",
       "",
       "ConSySencI.A é uma arquitetura cognitiva auditável para IA.",
       "Ela não é um novo modelo: é um sistema que impõe regras duras sobre o que existe, o que decide e como evolui.",
       "Tudo é evento, tudo é reproduzível por replay.",
-      "Hipótese nunca vira fato sem retorno observável.",
+      "Hipótese não vira fato sem retorno observável.",
       "Decisões são bloqueadas quando o estado é inconsistente.",
       "Evolução é versionada e controlada por gates.",
       "",
-      "Resultado: menos alucinação sistêmica, mais previsibilidade e governança — pronta para ambientes críticos e enterprise."
+      "Resultado: menos alucinação sistêmica, mais previsibilidade e governança — pronta para enterprise e ambientes críticos."
     ].join("\n");
 
     const toast = document.getElementById("toast");
@@ -980,9 +1076,8 @@
     async function copyText(text){
       try{
         await navigator.clipboard.writeText(text);
-        showToast("Pitch copiado para a área de transferência.");
+        showToast("Pitch copiado.");
       }catch(e){
-        // fallback
         const ta = document.createElement("textarea");
         ta.value = text;
         ta.style.position = "fixed";
@@ -991,25 +1086,12 @@
         ta.select();
         document.execCommand("copy");
         document.body.removeChild(ta);
-        showToast("Pitch copiado (modo compatibilidade).");
+        showToast("Pitch copiado (compat).");
       }
     }
 
-    document.getElementById("btnCopyPitch").addEventListener("click", ()=>{
+    document.getElementById("btnCopyPitch")?.addEventListener("click", ()=>{
       copyText(pitch30);
-    });
-
-    // Small UX: keyboard shortcuts
-    document.addEventListener("keydown", (e)=>{
-      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
-        e.preventDefault();
-        jumpTo("#auditoria");
-        showToast("Atalho: Auditoria");
-      }
-      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p"){
-        // let print happen, but hint
-        setTimeout(()=>showToast("Dica: salve como PDF na impressão."), 50);
-      }
     });
   </script>
 </body>
